@@ -1,0 +1,29 @@
+<p-table [value]="clientes" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+          <!--   <th>Codigo</th> -->
+            <th>Nome</th>
+            <th>cpf</th>
+            <th>rg</th>
+            <th>telefone</th>
+            <th>situação</th>
+            <th>data de nascimento</th>
+            <th>logradouro</th>
+            <th>ações</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cliente>
+        <tr>
+            <!-- <td>{{cliente.codigo}}</td> -->
+            <td>{{cliente.nome}}</td>
+            <td>{{cliente.cpf}}</td>
+            <td>{{cliente.rg}}</td>
+            <td>{{cliente.telefone}}</td>
+            <td>{{cliente.situacao}}</td>
+            <td>{{cliente.data_nascimento}}</td>
+            <td>{{cliente.logradouro?.logradouro}}</td>
+            <td><button (click)="deletar(cliente.idcliente)" pButton><i class="pi pi-trash"></i></button></td>
+            
+        </tr>
+    </ng-template>
+</p-table>

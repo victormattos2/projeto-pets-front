@@ -1,0 +1,26 @@
+<p-table [value]="produtos" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+            <!-- <th>Codigo</th> -->
+            <th>Nome</th>
+            <th>UN</th>
+            <th>Marca</th>
+            <th>Grupo</th>
+           <!--  <th>situação</th> -->
+        
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-produtos>
+        <tr>
+            <!-- <td>{{produtos.codigo}}</td> -->
+            <td>{{produtos.nome}}</td>
+            <td>{{produtos.unidade}}</td>
+            <td>{{produtos.marca?.nome}}</td>
+            <td>{{produtos.grupo}}</td>
+         <!--    <td>{{cliente.situacao}}</td> -->
+    
+            
+        </tr>
+    </ng-template>
+</p-table>

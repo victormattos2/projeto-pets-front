@@ -1,0 +1,20 @@
+<p-table [value]="marca" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+           <!--  <th>Codigo</th> -->
+            <th>Nome</th>
+            <th>observação</th>
+           <!--  <th>situação</th> -->
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-marca>
+        <tr>
+           <!--  <td>{{marca.codigo}}</td> -->
+            <td>{{marca.nome}}</td>
+            <td>{{marca.observacao}}</td>
+         <!--    <td>{{cliente.situacao}}</td> -->
+    
+        </tr>
+    </ng-template>
+</p-table>

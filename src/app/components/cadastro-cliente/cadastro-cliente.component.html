@@ -1,0 +1,111 @@
+<div class="p-grid">
+    
+    <div class="p-col-12">
+        <div class="card">
+            <p-toast key="tst"></p-toast>
+            <h4>Cadastro Clientes</h4>
+            <div class="p-fluid p-formgrid p-grid">
+
+                <div class="p-col-12">
+                    <div class="card">
+                        <h5>Tipo Cliente</h5>
+                        <div class="p-grid">
+                            <div class="p-col-12 p-md-1">
+                                <div class="p-field-radiobutton">
+                                    <p-radioButton name="cpf" value="0" [(ngModel)]="cliente.cli_fisica_juridica" id="cpf"></p-radioButton>
+                                    <label for="city1">CPF</label>
+                                </div>
+                            </div>
+                            <div class="p-col-12 p-md-1">
+                                <div class="p-field-radiobutton">
+                                    <p-radioButton name="cnpj" value="1" [(ngModel)]="cliente.cli_fisica_juridica" id="cnpj"></p-radioButton>
+                                    <label for="cnpj">CNPJ</label>
+                                </div>
+                            </div>
+
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="nome">Nome</label>
+                    <input id="nome" type="text" pInputText  name="nome" [(ngModel)]="cliente.nome" required>
+                </div>
+              
+                <div class="p-field p-col-12 p-md-6">
+
+                    
+                    <label *ngIf="cliente.cli_fisica_juridica=='1'" for="fatasia">Fantasia</label>
+                    <input *ngIf="cliente.cli_fisica_juridica=='1'" id="fantasia" type="text" pInputText  name="fantasia" [(ngModel)]="cliente.fantasia" >
+
+                    <label *ngIf="cliente.cli_fisica_juridica=='0'" for="cpf">CPF</label>
+                    <p-inputMask *ngIf="cliente.cli_fisica_juridica=='0'" [(ngModel)]="cliente.cpf" id="cpf" type="text" name="cpf" mask="999.999.999-99"></p-inputMask>
+ 
+                    <label *ngIf="cliente.cli_fisica_juridica=='0'" for="rg"> RG </label>
+                    <input *ngIf="cliente.cli_fisica_juridica=='0'" id="rg" type="text" pInputText name="rg" [(ngModel)]="cliente.rg" >
+
+                    
+                    <label *ngIf="cliente.cli_fisica_juridica=='1'" for="cnpj">CNPJ</label>
+                    <p-inputMask *ngIf="cliente.cli_fisica_juridica=='1'" [(ngModel)]="cliente.cnpj" id="cnpj" type="text" name="cnpj" mask="99.999.999/9999-99"></p-inputMask>
+                    
+                    <label *ngIf="cliente.cli_fisica_juridica=='1'" for="inscricao">Inscrição Estadual</label>
+                    <input *ngIf="cliente.cli_fisica_juridica=='1'" id="inscricao" type="text" pInputText  name="inscricao" [(ngModel)]="cliente.cli_inscricao">
+                    
+                </div>
+                
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="celular">Telefone</label>
+                    <p-inputMask [(ngModel)]="cliente.telefone" id="celular" type="tel" name="celular" mask="99-999999999"></p-inputMask>
+                </div>
+                <div class="p-field p-col-6 p-md-3">
+                    <h5> Ativo ➜</h5>
+			        <p-inputSwitch [ngModel]="ativo" (onChange)="onChangeSituacao()"></p-inputSwitch>
+                </div>
+                <div class="p-field p-col-6 p-md-3">
+                    <label for="data_nascimento">Data de Nascimento</label>
+                    <input id="data_nascimento" type="date" pInputText  name="data_nascimento" [(ngModel)]="cliente.data_nascimento">
+                </div>
+                <div class="p-field p-col-6 p-md-3">
+                    <label for="data_cadastro">Data de Cadastro</label>
+                    <input id="data_cadastro" type="date" pInputText  name="data_cadastro" [(ngModel)]="cliente.data_cadastro">
+                </div>
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="e-mail">E-mail</label>
+                    <input id="e-mail" type="text" pInputText name="e-mail" [(ngModel)]="cliente.email">
+                </div>
+            
+                  
+
+     
+            <!-- <div class="col-12 md:col-12"> 
+                <div class="card">
+                    <p-toast key=" tst"></p-toast>
+                    <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-3">
+                            <label for="logradouro">Logradouro</label>
+                            <input id="logradouro" type="text" pInputText  name="logradouro" [(ngModel)]="cliente.logradouro.logradouro">
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            <label for="numero">Número</label>
+                            <input id="numero" type="text" pInputText  name="numero" [(ngModel)]="cliente.logradouro.numero">   
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            <label for="bairro">Bairro</label>
+                            <input id="bairro" type="text" pInputText  name="bairro" [(ngModel)]="cliente.logradouro.bairro">               
+                        </div>
+                         <div class="p-field p-col-12 p-md3">
+                            <label for="cep"> CEP </label>
+                            <p-inputMask [(ngModel)]="cliente.logradouro.cep" pInputText type="text" name="cep" mask="99999-999"></p-inputMask>
+                        </div>
+                         <div class="p-field p-col-12 p-6">
+                            <label for="complemento"> Complemento </label>
+                            <input id="complemento" type="text" pInputText name="complemento" [(ngModel)]="cliente.logradouro.complemento">
+                        </div> 
+                   
+         
+                     </div>  -->
+                </div>
+            </div>
+            <button type="button" pButton [disabled]="!validacnpj(cliente.cnpj)"[disabled]="!validacpf(cliente.cpf)" (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
+        
+        </div>
+    </div>
+
+</div>
+ 

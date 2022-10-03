@@ -1,0 +1,21 @@
+<div class="p-grid">
+
+    <div class="p-col-12">
+        <div class="card">
+            <p-toast key="tst"></p-toast>
+            <h5>Cadastro de Marca</h5>
+            <div class="p-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-6">
+                <label for="nome">Nome</label>
+                <input id="nome" type="text" pInputText name="name" [(ngModel)]="marca.nome" required>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <label for="observacao">observação</label>
+                <input id="observacao" type="text" pInputText  name="unidade" [(ngModel)]="marca.observacao" >
+            </div> 
+            <button type="button" pButton (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
+            
+        </div>
+    </div>
+
+</div>

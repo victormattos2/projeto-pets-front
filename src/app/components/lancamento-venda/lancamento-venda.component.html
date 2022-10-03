@@ -1,0 +1,32 @@
+<div class="p-grid">
+    
+    <div class="p-col-12">
+        <div class="card">
+            <p-toast key="tst"></p-toast>
+            <h5>Lançamento de Venda</h5>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="cliente">Cliente</label>
+                    <!-- <input id="cliente" type="text" pInputText  name="cliente" [(ngModel)]="pedido.cliente" required> -->
+                    <p-autoComplete [(ngModel)]="pedido.cliente" [suggestions]="results" (completeMethod)="search($event)"
+                     field="nome"></p-autoComplete>
+                </div>
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="dataemiss">Data emissão</label>
+                    <input id="dataemiss" type="date" pInputText  name="dataemiss" [(ngModel)]="pedido.data_emissao" required>
+                </div>
+                 <div class="p-field p-col-12 p-md-6">
+                    <label for="datavenc">Data Vencimento</label>
+                    <input id="datavenc" type="date" pInputText  name="datavenc" [(ngModel)]="pedido.data_vencimento" required>
+                </div>
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="valortot">Valor total</label>
+                    <input id="valortot" type="text" pInputText  name="valottot" [(ngModel)]="pedido.valor_total" required>
+                </div>
+             
+                
+            </div>
+            <button type="button" pButton (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
+        </div>
+    </div>
+

@@ -1,0 +1,43 @@
+<div class="login-body" [ngClass]="{'layout-dark': dark, 'layout-light': !dark}">
+
+    <div class="login-content">
+        <div class="night-switch">
+            <p-button styleClass="dark-switch"  icon="pi pi-circle-on" (click)="dark = true"></p-button>
+            <p-button styleClass="light-switch"  icon="pi pi-circle-off" (click)="dark = false"></p-button>
+        </div>
+        <div class="login-panel">
+            <div class="login-panel-content">
+                <div class="logo">
+                    <img src="assets/fotos/logo_dog.jpg" alt="mirage-layout" />
+                </div>
+                <h1>Bem-vindo ao Space Pets</h1>
+                <p>Por favor digite usuário e senha</p>
+                <div class="forms">
+                    <div class="login-input-wrapper">
+                        <label for="usuario">Usuário</label>
+                        <input id="usuario" pInputText placeholder="Digite seu nome de usuário..." />
+                        <i class="pi pi-user"></i>
+                    </div>
+
+                    <div class="login-input-wrapper">
+                        <label for="senha">Senha</label>
+                        <input type="senha" id="password" placeholder="Digite sua senha" pPassword [feedback]="false"/>
+                        <i class="pi pi-lock"></i>
+                    </div>
+
+                    <div class="p-col-12">
+                        <p-checkbox [(ngModel)]="checked" label="Lembrar" value="SaveInfo" binary="true"></p-checkbox>
+                    </div>
+
+
+                    <div class="buttons">
+                        <button pButton type="button" [routerLink]="['/']" label="Entrar"></button>
+                        <a href="#" class="secondary-button">Esqueceu a senha?</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="desert"></div>
+    </div>
+</div>

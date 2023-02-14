@@ -23,16 +23,16 @@
                                 </div>
                             </div>
 
-                <div class="p-field p-col-12 p-md-6">
+                <div class="p-field p-col-12 p-md-7">
                     <label for="nome">Nome</label>
-                    <input id="nome" type="text" pInputText  name="nome" [(ngModel)]="cliente.nome" required>
+                    <input id="nome" type="text" pInputText  name="nome" [(ngModel)]="cliente.nome" upperCase required>
                 </div>
               
-                <div class="p-field p-col-12 p-md-6">
+                <div class="p-field p-col-12 p-md-3">
 
                     
                     <label *ngIf="cliente.cli_fisica_juridica=='1'" for="fatasia">Fantasia</label>
-                    <input *ngIf="cliente.cli_fisica_juridica=='1'" id="fantasia" type="text" pInputText  name="fantasia" [(ngModel)]="cliente.fantasia" >
+                    <input *ngIf="cliente.cli_fisica_juridica=='1'" id="fantasia" type="text" pInputText  name="fantasia" [(ngModel)]="cliente.fantasia" upperCase >
 
                     <label *ngIf="cliente.cli_fisica_juridica=='0'" for="cpf">CPF</label>
                     <p-inputMask *ngIf="cliente.cli_fisica_juridica=='0'" [(ngModel)]="cliente.cpf" id="cpf" type="text" name="cpf" mask="999.999.999-99"></p-inputMask>
@@ -49,9 +49,9 @@
                     
                 </div>
                 
-                <div class="p-field p-col-12 p-md-6">
+                <div class="p-fieng ld p-col-12 p-md-3">
                     <label for="celular">Telefone</label>
-                    <p-inputMask [(ngModel)]="cliente.telefone" id="celular" type="tel" name="celular" mask="99-999999999"></p-inputMask>
+                    <p-inputMask [(ngModel)]="cliente.telefone" id="celular" type="tel" name="celular" mask="99-99999999"></p-inputMask>
                 </div>
                 <div class="p-field p-col-6 p-md-3">
                     <h5> Ativo ➜</h5>
@@ -66,46 +66,43 @@
                     <input id="data_cadastro" type="date" pInputText  name="data_cadastro" [(ngModel)]="cliente.data_cadastro">
                 </div>
                 <div class="p-field p-col-12 p-md-6">
-                    <label for="e-mail">E-mail</label>
-                    <input id="e-mail" type="text" pInputText name="e-mail" [(ngModel)]="cliente.email">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email"  pInputText name="email" [(ngModel)]="cliente.email" >
                 </div>
-            
-                  
-
+                 
      
-            <!-- <div class="col-12 md:col-12"> 
+               <div class="col-12 md:col-12"> 
                 <div class="card">
                     <p-toast key=" tst"></p-toast>
                     <div class="p-fluid p-formgrid p-grid">
                         <div class="p-field p-col-12 p-md-3">
                             <label for="logradouro">Logradouro</label>
-                            <input id="logradouro" type="text" pInputText  name="logradouro" [(ngModel)]="cliente.logradouro.logradouro">
+                            <input id="logradouro" type="text" pInputText  name="logradouro" [(ngModel)]="logradouro.logradouro" upperCase>
                         </div>
                         <div class="p-field p-col-12 p-md-1">
                             <label for="numero">Número</label>
-                            <input id="numero" type="text" pInputText  name="numero" [(ngModel)]="cliente.logradouro.numero">   
+                            <input id="numero" type="text" pInputText  name="numero" [(ngModel)]="logradouro.numero">   
                         </div>
                         <div class="p-field p-col-12 p-md-3">
                             <label for="bairro">Bairro</label>
-                            <input id="bairro" type="text" pInputText  name="bairro" [(ngModel)]="cliente.logradouro.bairro">               
+                            <input id="bairro" type="text" pInputText  name="bairro" [(ngModel)]="logradouro.bairro" upperCase>               
                         </div>
-                         <div class="p-field p-col-12 p-md3">
+                         <div class="p-field p-col-12 p-md-3">
                             <label for="cep"> CEP </label>
-                            <p-inputMask [(ngModel)]="cliente.logradouro.cep" pInputText type="text" name="cep" mask="99999-999"></p-inputMask>
+                            <p-inputMask [(ngModel)]="logradouro.cep" id="cep" type="text" name="cep" mask="99999-999"></p-inputMask>
                         </div>
                          <div class="p-field p-col-12 p-6">
-                            <label for="complemento"> Complemento </label>
-                            <input id="complemento" type="text" pInputText name="complemento" [(ngModel)]="cliente.logradouro.complemento">
+                            <h6>Complemento</h6>
+                            <textarea upperCase id="complemento" rows="5" cols="50" [(ngModel)]="logradouro.complemento"></textarea >
                         </div> 
-                   
-         
-                     </div>  -->
-                </div>
-            </div>
-            <button type="button" pButton [disabled]="!validacnpj(cliente.cnpj)"[disabled]="!validacpf(cliente.cpf)" (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
-        
-        </div>
-    </div>
 
+
+
+            </div>
+           
+        </div>
+        <button type="button" pButton [disabled]="!validacnpj(cliente.cnpj)"[disabled]="!validacpf(cliente.cpf)" (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button> 
+    </div>
+    
 </div>
  

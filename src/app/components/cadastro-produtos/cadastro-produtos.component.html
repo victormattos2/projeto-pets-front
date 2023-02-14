@@ -7,11 +7,11 @@
             <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-6">
                 <label for="nome">Nome</label>
-                <input id="nome" type="text" pInputText name="name" [(ngModel)]="produto.nome" required>
+                <input id="nome" type="text" pInputText name="name" [(ngModel)]="produto.nome" upperCase required>
             </div>
             <div class="p-field p-col-12 p-md-6">
                 <label for="unidade">Unidade de Medida</label>
-                <input id="unidade" type="text" pInputText  name="unidade" [(ngModel)]="produto.unidade" required>
+                <input id="unidade" type="text" pInputText  name="unidade" [(ngModel)]="produto.unidade" upperCase required>
             </div> 
             <div class="p-field p-col-12 p-md-6">
                 <label for="grupo">Marca</label>
@@ -21,11 +21,12 @@
             </div> 
             <div class="p-field p-col-12 p-md-6">
                 <label for="grupo">Grupo</label>
-                <input id="grupo" type="text" pInputText  name="grupo" [(ngModel)]="produto.grupo" required>
+                <input id="grupo" type="text" pInputText  name="grupo" [(ngModel)]="produto.grupo" upperCase required>
             </div> 
-            <button type="button" pButton (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
+            
             
         </div>
+        <button type="button" pButton (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
     </div>
 
 </div>

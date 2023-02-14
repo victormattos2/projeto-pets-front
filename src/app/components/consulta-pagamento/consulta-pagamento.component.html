@@ -1,0 +1,26 @@
+<p-toast key=" tst"></p-toast>
+<button type="button" pButton (click)="novo()" label="Novo" class="p-button-primary p-mr-2 p-mb-2"></button>
+<p-table [value]="pagamento" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+          
+            <th>Nome</th>
+            <th>modo</th>
+            <th>Ações</th>
+          
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pagamento>
+        <tr>
+       
+            <td>{{pagamento.nome}}</td>
+            <td>{{pagamento.modo}}</td>
+            <td>
+                <button (click)="editar(pagamento.id_pagamento)" pButton class="p-mr-1" icon="pi pi-pencil"></button>
+                <button (click)="deletar(pagamento)" pButton class="p-button-danger" icon="pi pi-trash"></button>
+            </td>
+    
+        </tr>
+    </ng-template>
+</p-table>

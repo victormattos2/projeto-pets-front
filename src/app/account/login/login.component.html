@@ -1,0 +1,43 @@
+<div class="login-body" [ngClass]="{'layout-dark': dark, 'layout-light': !dark}">
+
+    <div class="login-content">
+        <div class="night-switch">
+            <!-- <p-button styleClass="dark-switch"  icon="pi pi-circle-on" (click)="dark = true"></p-button>
+            <p-button styleClass="light-switch"  icon="pi pi-circle-off" (click)="dark = false"></p-button> -->
+        </div>
+        <div class="login-panel">
+            <div class="login-panel-content">
+                <div class="logo">
+                    <img src="assets/fotos/logo_dog.jpg" alt="mirage-layout" />
+                </div>
+                <h1>Bem-vindo ao Space Pets</h1>
+                <p>Por favor digite usuário e senha</p>
+                
+                <div class="forms">
+                    <div class="login-input-wrapper">
+                        <label for="usuario">Usuário</label>
+                        <input id="usuario" name="usuario" type="usuario" [(ngModel)]="usuario.login" pInputText placeholder="Digite seu usuário..." upperCase required/>
+             <!--            <p-message severity="error" text="Field is required"></p-message> -->
+                        <i class="pi pi-user"></i>
+                    </div>
+
+                    <div class="login-input-wrapper">
+                        <label for="senha">Senha</label>
+                        <input type="password" id="password" name="password" id="password" [(ngModel)]="usuario.senha" placeholder="Digite sua senha" pPassword [feedback]="false" required/>
+                        <i class="pi pi-lock"></i>
+                    </div>
+                    <br>
+                    <div class="buttons">
+                       
+                        <p class="msgErro" *ngIf="msgErro" > {{msgErro}} </p>
+                        <button pButton type="button" [disabled]="validarusuario()" (click)="entrar()" label="Entrar"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="desert"></div>
+        
+    </div>
+    <p-toast position="bottom-center" key="tc"></p-toast>
+</div>

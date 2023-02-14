@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PetsService {
+  
   apiURL=`${environment.apiURL}/pets`;
 
   constructor(private http:HttpClient) { }
@@ -14,9 +15,31 @@ export class PetsService {
    return this.http.get(this.apiURL)
 
   }
+
+  findById(id){
+    return this.http.get(this.apiURL + "/" + id);
+ 
+   }
   
   save(pets){
     return this.http.post(this.apiURL, pets)
 
+  }
+
+  filtrar(filtro){
+    return this.http.post(`${this.apiURL}/filtrar`,filtro).toPromise().then(data => { return data; })
+  }
+
+  deletar(id: number){
+    return this.http.delete(this.apiURL+'/'+id)
+   }
+
+   relatorioPDF(): Promise<any> {
+    
+  
+    return this.http.get(`${this.apiURL}/relatorio-pdf`, { 
+        responseType: 'blob'})
+      .toPromise()
+      ;
   }
 }

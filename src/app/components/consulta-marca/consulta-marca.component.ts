@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MarcaService } from './../../services/marca.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,7 +11,8 @@ export class  ConsultaMarcaComponent implements OnInit {
   
   marca:any[] = [];
 
-  constructor(private marcaService: MarcaService) { 
+  constructor(private marcaService: MarcaService,
+              private router: Router) { 
   }
 
   ngOnInit(): void {
@@ -20,6 +22,19 @@ export class  ConsultaMarcaComponent implements OnInit {
   findall(){
     this.marcaService.findall().subscribe((response:any[])=>{
       this.marca = response;
+    })
+  }
+  novo(){
+    this.router.navigate(['cadastro-marca'])
+  }
+  
+  editar(id){
+    this.router.navigate([`cadastro-marca/${id}`]);
+  }
+
+  deletar(id){
+    this.marcaService.deletar(id).subscribe(()=>{
+      this.findall();
     })
   }
 }

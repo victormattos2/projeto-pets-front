@@ -1,3 +1,8 @@
+import { PetsService } from 'src/app/services/pets.service';
+import { ClienteService } from './services/cliente.service';
+import { ProdutoService } from './services/produto.service';
+import { VendaService } from './services/venda.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AppMainComponent } from './app.main.component';
 
@@ -9,7 +14,13 @@ export class AppMenuComponent implements OnInit {
 
     model: any[];
 
-    constructor(public appMain: AppMainComponent) {}
+    constructor(public appMain: AppMainComponent, 
+        public router: Router,
+        public vendaService: VendaService,
+        public produtoService: ProdutoService,
+        public clienteService: ClienteService,
+        public petsService: PetsService
+        ) {}
 
     ngOnInit() {
         this.model = [
@@ -21,6 +32,8 @@ export class AppMenuComponent implements OnInit {
                 {label: 'Pets', icon:'pi pi-github', routerLink: ['/cadastro-pets']},
                 {label: 'Produtos', icon:'pi pi-shopping-bag', routerLink: ['/cadastro-produtos']},
                 {label: 'Marca', icon:'pi pi-ticket', routerLink: ['/cadastro-marca']},
+                {label: 'Pagamento', icon:'pi pi-dollar', routerLink: ['/cadastro-pagamento']},
+                {label: 'Usuário', icon:'pi pi-user-plus', routerLink: ['/cadastro-usuario']},
                 ]
             },
            
@@ -28,8 +41,10 @@ export class AppMenuComponent implements OnInit {
             items: [
                 {label: 'Clientes', icon:'pi pi-users', routerLink: ['/consulta-cliente']},
                 {label: 'Pets', icon:'pi pi-github', routerLink: ['/consulta-pets']},
-                {label:  'Produtos', icon:'pi pi-shopping-bag', routerLink: ['/consulta-produtos']},
-                {label:  'Marca', icon:'pi pi-ticket', routerLink: ['/consulta-marca']},
+                {label: 'Produtos', icon:'pi pi-shopping-bag', routerLink: ['/consulta-produtos']},
+                {label: 'Marca', icon:'pi pi-ticket', routerLink: ['/consulta-marca']},
+                {label: 'Pagamento', icon:'pi pi-dollar', routerLink: ['/consulta-pagamento']},
+                {label: 'Usuário', icon:'pi pi-user', routerLink: ['/consulta-usuario']},
 
                  ]
              },
@@ -40,6 +55,34 @@ export class AppMenuComponent implements OnInit {
                     {label: 'Lançamento de Venda', icon: 'pi pi-sign-in', routerLink: ['/lancamento-venda']},
                     {label: 'Consulta de Venda', icon: 'pi pi-search', routerLink: ['/consulta-venda']},
         
+                ]
+            },
+            {
+                label: 'Movimentação', icon: 'pi pi-cloud', routerLink: ['/estoque'],
+                items: [
+                    {label: 'Movimentação de Estoque', icon: 'pi pi-cloud-download', routerLink: ['/entrada-movimentacao']},
+                    {label: 'Consulta de Estoque', icon: 'pi pi-search', routerLink: ['/consulta-movimentacao']},
+        
+                ]
+            },
+            {
+                label: 'Agendamento', icon: 'pi pi-calendar', routerLink: ['/agendamento'],
+                items: [
+                    {label: 'Lançar Agendamento', icon: 'pi pi-calendar-plus', routerLink: ['/cadastro-agendamento']},
+                    {label: 'Consulta de Agendamento', icon: 'pi pi-search', routerLink: ['/cosulta-agendamento']},
+        
+                ]
+            },
+            {
+                label: 'Relatórios', icon: 'pi pi-file', routerLink: ['/'],
+                items: [
+                    {label: 'Relatório de Cliente', icon: 'pi pi-users', command: (event) => { this.relatorioCliente()} },
+                   /*  {label: 'Relatório de Cliente/endereço', icon: 'pi pi-users', routerLink: ['/']}, */
+                 /*    {label: 'Relatório de Pets', icon: 'pi pi-github', command: (event) => { this.relatorioPets()} }, */
+                    {label: 'Relatório de Produtos', icon: 'pi pi-shopping-bag', command: (event) => { this.relatorioProduto()} },
+                    {label: 'Relatório de Vendas', icon: 'pi pi-server',  command: (event) => { this.relatorioVenda()}  },
+                   /*  {label: 'Relatório de Estoque', icon: 'pi pi-list', routerLink: ['/']}, */
+                  
                 ]
             },
             
@@ -79,13 +122,13 @@ export class AppMenuComponent implements OnInit {
                 ]
             }, */
             {
-                label: 'Usuário', icon: 'pi pi-fw pi-copy', routerLink: ['/pages'],
+                label: 'Opções', icon: 'pi pi-cog', routerLink: ['/pages'],
                 items: [
                     /* {label: 'Crud', icon: 'pi pi-fw pi-pencil', routerLink: ['/pages/crud']},
                     {label: 'Calendar', icon: 'pi pi-fw pi-calendar-plus', routerLink: ['/pages/calendar']},
                     {label: 'Timeline', icon: 'pi pi-fw pi-calendar', routerLink: ['/pages/timeline']},
                     { label: 'Landing', icon: 'pi pi-fw pi-globe', url: 'assets/pages/landing.html', target: '_blank' }, */
-                    { label: 'Login', icon: 'pi pi-fw pi-sign-in', routerLink: ['/login'], target: '_blank' },
+                    { label: 'Sair', icon: 'pi pi-fw pi-sign-in', command: (event) => { this.sair()} , target: '_blank' },
                    /*  { label: 'Error', icon: 'pi pi-fw pi-exclamation-triangle', routerLink: ['/error'], target: '_blank' },
                     { label: '404', icon: 'pi pi-fw pi-times', routerLink: ['/404'], target: '_blank' },
                     {label: 'Access Denied', icon: 'pi pi-fw pi-ban', routerLink: ['/accessdenied'], target: '_blank'},
@@ -145,5 +188,48 @@ export class AppMenuComponent implements OnInit {
 
     onMenuClick() {
         this.appMain.menuClick = true;
+    }
+
+    sair(){
+        localStorage.removeItem("usuario");
+        this.router.navigate(['/login']);
+    }
+
+    async relatorioVenda(){
+        await this.vendaService.relatorioPDF()
+        .then(result => {
+           
+            const fileURL = URL.createObjectURL(result);
+            window.open(fileURL, '_blank');
+        })
+    }
+
+    async relatorioProduto(){
+        await this.produtoService.relatorioPDF()
+        .then(result => {
+           
+            const fileURL = URL.createObjectURL(result);
+            window.open(fileURL, '_blank');
+        })
+    }
+
+    async relatorioCliente(){
+        await this.clienteService.relatorioPDF()
+        .then(result => {
+           
+            const fileURL = URL.createObjectURL(result);
+            window.open(fileURL, '_blank');
+
+        })
+    }
+
+    async relatorioPets(){
+        await this.petsService.relatorioPDF()
+        .then(result => {
+           
+            const fileURL = URL.createObjectURL(result);
+            window.open(fileURL, '_blank');
+
+        })
     }
 }

@@ -5,6 +5,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
+
+
 // PrimeNG Components for demos
 import {AccordionModule} from 'primeng/accordion';
 import {AutoCompleteModule} from 'primeng/autocomplete';
@@ -94,7 +96,7 @@ import {AppMainComponent} from './app.main.component';
 import {AppNotfoundComponent} from './pages/app.notfound.component';
 import {AppErrorComponent} from './pages/app.error.component';
 import {AppAccessdeniedComponent} from './pages/app.accessdenied.component';
-import {AppLoginComponent} from './pages/app.login.component';
+
 import {AppCrudComponent} from './pages/app.crud.component';
 import {AppCalendarComponent} from './pages/app.calendar.component';
 import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
@@ -164,6 +166,18 @@ import { CadastroMarcaComponent } from './components/cadastro-marca/cadastro-mar
 import { ConsultaMarcaComponent } from './components/consulta-marca/consulta-marca.component';
 import { LancamentoVendaComponent } from './components/lancamento-venda/lancamento-venda.component';
 import { ConsultaVendaComponent } from './components/consulta-venda/consulta-venda.component';
+import { CadastroPagamentoComponent } from './components/cadastro-pagamento/cadastro-pagamento.component';
+import { ConsultaPagamentoComponent } from './components/consulta-pagamento/consulta-pagamento.component';
+import { NgxUpperCaseDirectiveModule } from 'ngx-upper-case-directive';
+import { CadastroUsuarioComponent } from './components/cadastro-usuario/cadastro-usuario.component';
+import { ConsultaUsuarioComponent } from './components/consulta-usuario/consulta-usuario.component';
+import { EntradaMovimentacaoComponent } from './components/entrada-movimentacao/entrada-movimentacao.component';
+import { ConsultaMovimentacaoComponent } from './components/consulta-movimentacao/consulta-movimentacao.component';
+import { RelatorioComponent } from './relatorio/relatorio.component';
+import { CadastroAgendamentoComponent } from './components/cadastro-agendamento/cadastro-agendamento.component';
+import { ConsultaAgendamentoComponent } from './components/consulta-agendamento/consulta-agendamento.component';
+import { LoginComponent } from './account/login/login.component';
+import { AuthenticationComponent } from './layout/authentication/authentication.component';
 
 FullCalendarModule.registerPlugins([
     dayGridPlugin,
@@ -259,6 +273,7 @@ FullCalendarModule.registerPlugins([
         TreeModule,
         TreeTableModule,
         VirtualScrollerModule,
+        NgxUpperCaseDirectiveModule,
     ],
     declarations: [
         AppComponent,
@@ -273,7 +288,7 @@ FullCalendarModule.registerPlugins([
         AppNotfoundComponent,
         AppErrorComponent,
         AppAccessdeniedComponent,
-        AppLoginComponent,
+       /*  AppLoginComponent, */
         AppCrudComponent,
         AppCalendarComponent,
         AppTimelineDemoComponent,
@@ -316,7 +331,22 @@ FullCalendarModule.registerPlugins([
         ConsultaMarcaComponent,
         LancamentoVendaComponent,
         ConsultaVendaComponent,
+        CadastroPagamentoComponent,
+        ConsultaPagamentoComponent,
+        CadastroUsuarioComponent,
+        ConsultaUsuarioComponent,
+        EntradaMovimentacaoComponent,
+        ConsultaMovimentacaoComponent,
+        RelatorioComponent,
+        CadastroAgendamentoComponent,
+        ConsultaAgendamentoComponent,
+        LoginComponent,
+        AuthenticationComponent,
+    
         
+    ],
+    exports:[
+        ToastModule,
     ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy},

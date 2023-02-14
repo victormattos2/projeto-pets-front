@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { MarcaService } from './../../services/marca.service';
 import { Marca } from './../../models/model';
 import { MessageService } from 'primeng/api';
@@ -13,16 +14,26 @@ export class CadastroMarcaComponent implements OnInit {
 
   providers:[MessageService]
 
-  constructor(private MarcaService: MarcaService,
+  constructor(protected Router: ActivatedRoute,
+              private MarcaService: MarcaService,
               private MessageService:MessageService) {
 
                }
 
   ngOnInit(): void {
+    const id = this.Router.snapshot.params['id'];
+    if (id != undefined) {
+      this.MarcaService.findById(id).subscribe((response) => {
+        console.log(response);
+        this.marca = response as Marca;
+      })
+    }
   }
+
   salvar(){
     this.MarcaService.save(this.marca).subscribe((response)=>{
-      this.MessageService.add({key: 'tst',severity:'succes', summary: 'Sucesso', detail:'Marca cadastrada'});
+      this.MessageService.add({key: 'tst',severity:'success', summary: 'Sucesso', detail:'Marca cadastrada'});
+      this.marca=new Marca();
     })
   }
 

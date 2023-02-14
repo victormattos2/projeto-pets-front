@@ -1,3 +1,5 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClienteService } from './../../services/cliente.service';
 import { PetsService } from './../../services/pets.service';
 import { Pets } from './../../models/model';
 
@@ -11,32 +13,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastroPetsComponent implements OnInit {
   pets:Pets=new Pets();
+  ativo: boolean;
+  results: any[];
+
 
   providers:[MessageService]
 
-  constructor(private petsService: PetsService,
-              private MessageService:MessageService) {
-
+  constructor(protected Router: ActivatedRoute,
+              private petsService: PetsService,
+              private messageService:MessageService,
+              private clienteService: ClienteService,
+              private router: Router) {
+                
                }
 
+ /*  ngOnInit(): void {
+    this.onChangeSituacao();
+  } */
   ngOnInit(): void {
+    const id = this.Router.snapshot.params['id'];
+    if (id != undefined) {
+      this.petsService.findById(id).subscribe((response) => {
+        console.log(response);
+        this.pets = response as Pets;
+      })
+    }
   }
 
+  voltar(){
+    this.router.navigate(['consulta-pets']);
+  }
+
+  search(event) {
+    this.clienteService.filtrar(event.query).then((data : any[]) => {
+        this.results = data;
+    });
+}
 
   salvar(){
     this.petsService.save(this.pets).subscribe((response)=>{
-      this.MessageService.add({key: 'tst',severity:'succes', summary: 'Sucesso', detail:'Pet Cadastrado'});
+      this.messageService.add({key: 'tst',severity:'success', summary: 'Sucesso', detail:'Pet Cadastrado'});
       this.pets=new Pets();
     })
   }
-  onChangeSituacao(ativo){
-    if(ativo.checked){
-      this.pets.situacao = 1;
-      console.log(this.pets.situacao)
-    }else{
-      this.pets.situacao = 0;
-      console.log(this.pets.situacao)
-    }
+  
+  onChangeSituacao(){
+      if(this.ativo==true){
+         this.ativo=false;
+       
+     }else{
+         this.ativo=true
+          }
+      this.pets.situacao=Number(this.ativo);
     }
 
 }

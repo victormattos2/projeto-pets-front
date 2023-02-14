@@ -1,4 +1,6 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
+import { Usuario } from './models/model';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { MenuService } from './app.menu.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { PrimeNGConfig } from 'primeng/api';
@@ -19,7 +21,7 @@ import {AppComponent} from './app.component';
         ])
     ]
 })
-export class AppMainComponent {
+export class AppMainComponent  implements OnInit{
 
     rightPanelClick: boolean;
 
@@ -55,8 +57,34 @@ export class AppMainComponent {
 
     configActive: boolean;
 
+    usuario:  Usuario; 
+
     constructor(public renderer: Renderer2, private menuService: MenuService,
-                private primengConfig: PrimeNGConfig, public app: AppComponent) {}
+                private primengConfig: PrimeNGConfig, public app: AppComponent,
+                private router: Router) {
+
+                }
+    ngOnInit(): void {
+        this.usuario = JSON.parse(localStorage.getItem('usuario'));
+        this.validarUsuarioLogado();
+    }
+
+    validarUsuarioLogado(){
+        if(this.usuario){
+            console.log(" usuario conectado ");
+        }else{
+            console.log(" vai redirecionar");
+            this.router.navigate(['/login']);
+            
+        }
+    }
+
+     // desenvolvido victor ramos 
+     
+    
+
+
+     // Victor Mattos
 
     onLayoutClick() {
         if (!this.topbarItemClick) {

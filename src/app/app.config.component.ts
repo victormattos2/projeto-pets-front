@@ -6,9 +6,9 @@ import {AppMainComponent} from './app.main.component';
 @Component({
     selector: 'app-config',
     template: `
-        <a href="#" class="layout-config-button" (click)="onConfigButtonClick($event)">
+        <!-- <a href="#" class="layout-config-button" (click)="onConfigButtonClick($event)">
             <i class="pi pi-cog"></i>
-        </a>
+        </a> -->
         <div id="layout-config" class="layout-config" [ngClass]="{'layout-config-exit-done': !appMain.configActive,
         'layout-config-enter-done': appMain.configActive}" [@children]="appMain.configActive ? 'visibleAnimated' : 'hiddenAnimated'">
             <div class="layout-config-content">

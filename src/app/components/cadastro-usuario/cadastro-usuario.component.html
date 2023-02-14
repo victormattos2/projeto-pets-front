@@ -1,0 +1,32 @@
+<div class="p-grid">
+    
+    <div class="p-col-12">
+        <div class="card">
+            <p-toast key="tst"></p-toast>
+            <h5>Cadastro Usuário</h5>
+            <div class="p-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="nome">Nome</label>
+                    <input id="nome" type="text" pInputText  name="nome" [(ngModel)]="usuario.login" upperCase required>
+                </div>
+               
+                <div class="p-field p-col-6 p-md-3">
+                    <label for="senha">Senha</label>
+                    <input id="senha" type="password" pInputText  name="senha" [(ngModel)]="usuario.senha">
+                </div>
+                <div class="p-field p-col-6 p-md-3">
+                    <label for="tipo">tipo</label>
+                    <input id="tipo" type="text" pInputText  name="data_cadastro" [(ngModel)]="usuario.tipo" upperCase>
+                </div>
+        
+                <div class="p-field p-col-6 p-md-3">
+                    <h5> Ativo ➜</h5>
+			        <p-inputSwitch [ngModel]="ativo" (onChange)="onChangeSituacao()"></p-inputSwitch>
+                </div>
+           
+            </div>
+            <button type="button" pButton (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
+        </div>
+    </div>
+
+</div>

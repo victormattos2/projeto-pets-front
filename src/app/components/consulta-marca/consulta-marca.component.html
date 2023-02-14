@@ -1,20 +1,24 @@
+<button type="button" pButton (click)="novo()" label="Novo" class="p-button-primary p-mr-2 p-mb-2"></button>
 <p-table [value]="marca" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
-           <!--  <th>Codigo</th> -->
+          
             <th>Nome</th>
             <th>observação</th>
-           <!--  <th>situação</th> -->
+            <th>Opções</th>
 
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-marca>
         <tr>
-           <!--  <td>{{marca.codigo}}</td> -->
+    
             <td>{{marca.nome}}</td>
             <td>{{marca.observacao}}</td>
-         <!--    <td>{{cliente.situacao}}</td> -->
-    
+            <td>
+                <button (click)="editar(marca.id_marca)" pButton class="p-mr-1" icon="pi pi-pencil"></button>    
+                <button (click)="deletar(marca.id_marca)" pButton class="p-button-danger" icon="pi pi-trash"></button>
+            </td>
+        
         </tr>
     </ng-template>
 </p-table>

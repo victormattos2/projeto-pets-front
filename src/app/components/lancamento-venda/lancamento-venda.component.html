@@ -3,30 +3,132 @@
     <div class="p-col-12">
         <div class="card">
             <p-toast key="tst"></p-toast>
-            <h5>Lançamento de Venda</h5>
-            <div class="p-fluid p-formgrid p-grid">
-                <div class="p-field p-col-12 p-md-6">
-                    <label for="cliente">Cliente</label>
-                    <!-- <input id="cliente" type="text" pInputText  name="cliente" [(ngModel)]="pedido.cliente" required> -->
-                    <p-autoComplete [(ngModel)]="pedido.cliente" [suggestions]="results" (completeMethod)="search($event)"
-                     field="nome"></p-autoComplete>
-                </div>
-                <div class="p-field p-col-12 p-md-6">
-                    <label for="dataemiss">Data emissão</label>
-                    <input id="dataemiss" type="date" pInputText  name="dataemiss" [(ngModel)]="pedido.data_emissao" required>
-                </div>
-                 <div class="p-field p-col-12 p-md-6">
-                    <label for="datavenc">Data Vencimento</label>
-                    <input id="datavenc" type="date" pInputText  name="datavenc" [(ngModel)]="pedido.data_vencimento" required>
-                </div>
-                <div class="p-field p-col-12 p-md-6">
-                    <label for="valortot">Valor total</label>
-                    <input id="valortot" type="text" pInputText  name="valottot" [(ngModel)]="pedido.valor_total" required>
-                </div>
+            <p-tabView>
+                <p-tabPanel header="Principal">
+                    <h5>Lançamento de Venda</h5>
+                    <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-6">
+                            <label for="cliente">Cliente</label>
+                            <p-autoComplete [(ngModel)]="pedido.cliente" placeholder="Pesquise o Cliente" [suggestions]="results" (completeMethod)="search($event)"
+                             field="nome"></p-autoComplete>
+                        </div>
+                        <div class="p-field p-col-12 p-md-6">
+                            <label for="dataemiss">Data emissão</label>
+                            <input id="dataemiss" type="date" pInputText  name="dataemiss" [(ngModel)]="pedido.data_emissao" required>
+                        </div>
+                        
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Produtos">
+                    <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-6">
+                            <label for="produto">Produto</label>
+                            <p-autoComplete [(ngModel)]="itempedido.produto" [suggestions]="results" (completeMethod)="searchproduto($event)"
+                            field="nome"></p-autoComplete>
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            <label for="quantidade">Quantidade</label>
+                            <input (change)="calcularTotalItem()" id="quantidade" type="text" pInputText  name="quantidade" [(ngModel)]="itempedido.quantidade" required>
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            <label for="valoruni">Valor Unitário</label>
+                            <input (change)="calcularTotalItem()" id="valortot" type="text" pInputText  name="valoruni" [(ngModel)]="itempedido.valor_unitario" required>
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            <label for="valortot">Valor total</label>
+                           <!--  <input disabled="true" id="valortot" type="text" pInputText  name="valottot" [(ngModel)]="itempedido.valor_total" required> -->
+                            <p-inputNumber disabled="true" (change)="calcularTotalItem()" id="valortot" type="text" name="valoruni" [(ngModel)]="itempedido.valor_total" mode="decimal" [minFractionDigits]="2"></p-inputNumber>
+                        </div>
+                        <button [disabled]="validarItem()" type="button" pButton (click)="salvarItens()" label="ADICIONAR" class="p-button-success p-mr-2 p-mb-2"></button>
+                                         
+                    </div>
+                    <p-table [value]="pedido.itempedidos" responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Produto</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário</th>
+                                <th>Valor Total</th>
+                                <th>Ações</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr>
+                                <td>{{item.produto?.nome}}</td>
+                                <td>{{item.quantidade}}</td>
+                                <td>{{item.valor_unitario}}</td>
+                                <td>{{item.valor_total}}</td>
+                                <td>
+                                   <!--  <button (click)="editar(item)" pButton class="p-mr-1" icon="pi pi-pencil"></button>  -->
+                                    <button (click)="excluirItem(item)" pButton class="p-button-danger" icon="pi pi-trash"></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </p-tabPanel> 
+                <p-tabPanel header="Pagamentos">
+                    <div class="p-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-3">
+                            <label for="pagamento">Modo de Pagamento</label>
+                            <p-dropdown id="pagamento" [options]="listapagamento" optionLabel="nome" [(ngModel)]="pagamento" placeholder="Selecione o modo"></p-dropdown>
+                        </div> 
+                        <div class="p-field p-col-12 p-md-3"
+                            *ngIf="pagamento && pagamento.modo=='A PRAZO'">
+                            <label for="numeroparcela">Número de Parcelas</label>
+                            <input id="numeroparcela" type="text" pInputText name="numeroparcela" [(ngModel)]="quantidade_parcelas">
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            <label for="datavenc">Data Vencimento</label>
+                            <input id="datavenc" type="date" pInputText  name="datavenc" [(ngModel)]="pedido.data_vencimento" required>
+                        </div>
+                        <div class="p-field p-col-12 p-md-2">
+                            <label for="valortot">Valor Total</label>
+                            <input id="valortot" type="text" pInputText  name="valottot" [(ngModel)]="pedido.valor_total" required>
+                        </div>
+                        <button type="button" pButton (click)="inserirPagamento()" label="GERAR PARCELAS" class="p-button-success p-mr-2 p-mb-2"></button>
+                      
+                        
+                    </div>
+                    <p-table [value]="pedido.pagamentopedido" responsiveLayout="scroll">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>Numero Parcela</th>
+                                <th>Data Vencimento</th>
+                                <th>Valor Parcela</th>
+                                <th>Ações</th>
+                                
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-itempagamento>
+                            <tr>
+                                <td>{{itempagamento.numero_parcela}}</td>
+                                <td>{{itempagamento.data_vencimento}}</td>
+                                <td>{{itempagamento.valor_parcela}}</td>  
+                                <td> 
+                                    <button (click)="editar(itempagamento)" pButton class="p-mr-1" icon="pi pi-pencil"></button>
+                                    <button (click)="excluirItempagamento(itempagamento)" pButton class="p-button-danger" icon="pi pi-trash"></button>
+                                </td>     
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                  
+                </p-tabPanel>
+            </p-tabView>
+
+
              
                 
-            </div>
-            <button type="button" pButton (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
+            
+            <button type="button" pButton (click)="salvar()" label="Finalizar" class="p-button-success p-mr-2 p-mb-2"></button>
         </div>
     </div>
+
+    <p-dialog header="Title" [(visible)]="display">
+        <div class="p-field p-col-12 p-md-2">
+            <label for="datavenc">Data Vencimento</label>
+            <input id="datavenc" type="date" pInputText  name="datavenc" [(ngModel)]="pagamentoEdicao.data_vencimento" required>
+        </div>
+        <button type="button" pButton (click)="salvarvencimento()" label="Salvar"></button>
+    </p-dialog>
 

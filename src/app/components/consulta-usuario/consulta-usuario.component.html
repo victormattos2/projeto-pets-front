@@ -1,0 +1,24 @@
+<button type="button" pButton (click)="novo()" label="Novo" class="p-button-primary p-mr-2 p-mb-2"></button>
+<p-table [value]="usuario" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+          
+            <th>Nome</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+          
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-usuario>
+        <tr>   
+
+            <td>{{usuario.login}}</td>
+            <td>{{usuario.tipo}}</td>
+            <td>
+                <button (click)="editar(usuario.id_usuario)" pButton class="p-mr-1" icon="pi pi-pencil"></button>
+                <button (click)="deletar(usuario.id_usuario)" pButton class="p-button-danger" icon="pi pi-trash"></button>
+            </td>
+    
+        </tr>
+    </ng-template>
+</p-table>

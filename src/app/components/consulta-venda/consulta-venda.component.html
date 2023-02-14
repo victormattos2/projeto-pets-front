@@ -1,1 +1,28 @@
-<p>consulta-venda works!</p>
+<button type="button" pButton (click)="novo()" label="Novo" class="p-button-primary p-mr-2 p-mb-2"></button>
+<p-table [value]="venda" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+        <tr>
+          
+            <th>Cliente</th>
+            <th>Data Emissão</th>
+            <th>Data Vencimento</th>
+            <th>Valor Total</th>
+            <th>Ações</th>
+
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-pedido>
+        <tr>   
+
+            <td>{{pedido.cliente}}</td>
+            <td>{{pedido.data_emissao}}</td>
+            <td>{{pedido.data_vencimento}}</td>
+            <td>{{pedido.valor_total}}</td>
+            <td>
+               <!--  <button (click)="editar(pedido.id_pedido)" pButton class="p-mr-1" icon="pi pi-pencil"></button> -->
+                <button (click)="deletar(pedido.id_pedido)" pButton class="p-button-danger" icon="pi pi-trash"></button>
+            </td>
+    
+        </tr>
+    </ng-template>
+</p-table>

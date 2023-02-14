@@ -7,9 +7,8 @@
             <div class="p-fluid p-formgrid p-grid">
                 <div class="p-field p-col-12 p-md-6">
                     <label for="nome">Nome</label>
-                    <input id="nome" type="text" pInputText  name="nome" [(ngModel)]="pets.nome" required>
+                    <input id="nome" type="text" pInputText  name="nome" [(ngModel)]="pets.nome" upperCase required>
                 </div>
-               
                 <div class="p-field p-col-6 p-md-3">
                     <label for="data_nascimento">Data de Nascimento</label>
                     <input id="data_nascimento" type="date" pInputText  name="data_nascimento" [(ngModel)]="pets.data_nascimento">
@@ -19,39 +18,34 @@
                     <input id="data_cadastro" type="date" pInputText  name="data_cadastro" [(ngModel)]="pets.data_cadastro">
                 </div>
                 <div class="p-field p-col-12 p-md-6">
+                    <label for="tutor">Tutor</label>
+                    <p-autoComplete [(ngModel)]="pets.tutor" [suggestions]="results" placeholder="Pesquise aqui o Tutor!"(completeMethod)="search($event)"
+                     field="nome"></p-autoComplete>
+                </div>
+                <div class="p-field p-col-12 p-md-4">
                     <label for="raca">Raça</label>
-                    <input id="raca" type="text" pInputText  name="raca" [(ngModel)]="pets.raca" >
+                    <input id="raca" type="text" pInputText  name="raca" [(ngModel)]="pets.raca" upperCase >
                 </div> 
-                <div class="p-field p-col-12 p-md-6">
-                    <label for="Cor">Cor</label>
-                    <input id="Cor" type="text" pInputText  name="Cor" [(ngModel)]="pets.Cor" >
-                </div> 
-                <div class="p-field p-col-12 p-md-6">
-                    <label for="sexo">Sexo</label>
-                    <input id="sexo" type="text" pInputText  name="sexo" [(ngModel)]="pets.sexo" >
-                </div> 
-                <div class="p-field p-col-12 p-md-6">
-                    <label for="especie">Espécie</label>
-                    <input id="especie" type="text" pInputText  name="especie" [(ngModel)]="pets.especie" >
-                </div> 
-                <!-- <div class="p-field p-col-12 p-md-6">
+                <div class="p-field p-col-12 p-md-2">
                     <label for="peso">Peso</label>
                     <input id="peso" type="text" pInputText  name="peso" [(ngModel)]="pets.peso" >
-                </div>  -->
-                <!-- <div class="p-field p-col-12 p-md-6">
-                    <label for="tutor">Tutor</label>
-                    <input id="tutor" type="text" pInputText  name="tutor" [(ngModel)]="pets.tutor" >
-                </div>  -->
-
-
-                <div class="p-field p-col-6 p-md-3">
-                    <!-- <label for="situacao">Situacao</label>
-                    <input id="situacao" type="text" pInputText  name="situacao" [(ngModel)]="cliente.situacao"> -->
-                    <h5>Ativo?</h5>
-			        <p-inputSwitch [ngModel]="pets.situacao" (onChange)="onChangeSituacao($event)"></p-inputSwitch>
+                </div> 
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="Cor">Cor</label>
+                    <input id="Cor" type="text" pInputText  name="cor" [(ngModel)]="pets.cor" upperCase >
+                </div> 
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="sexo">Sexo</label>
+                    <input id="sexo" type="text" pInputText  name="sexo" [(ngModel)]="pets.sexo" upperCase >
+                </div> 
+                <div class="p-field p-col-12 p-md-4">
+                    <label for="especie">Espécie</label>
+                    <input id="especie" type="text" pInputText  name="especie" [(ngModel)]="pets.especie" upperCase >
                 </div>
-            
-    
+                <div class="p-field p-col-6 p-md-3">
+                    <h5> Ativo ➜</h5>
+			        <p-inputSwitch [ngModel]="ativo" (onChange)="onChangeSituacao()"></p-inputSwitch>
+                </div>
                 
             </div>
             <button type="button" pButton (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>

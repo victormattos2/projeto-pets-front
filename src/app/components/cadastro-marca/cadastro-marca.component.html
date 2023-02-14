@@ -7,15 +7,14 @@
             <div class="p-fluid p-formgrid p-grid">
             <div class="p-field p-col-12 p-md-6">
                 <label for="nome">Nome</label>
-                <input id="nome" type="text" pInputText name="name" [(ngModel)]="marca.nome" required>
+                <input id="nome" type="text" pInputText name="name" [(ngModel)]="marca.nome" upperCase required>
             </div>
             <div class="p-field p-col-12 p-md-6">
                 <label for="observacao">observação</label>
-                <input id="observacao" type="text" pInputText  name="unidade" [(ngModel)]="marca.observacao" >
+                <input id="observacao" type="text" pInputText  name="unidade" [(ngModel)]="marca.observacao" upperCase >
             </div> 
-            <button type="button" pButton (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
-            
         </div>
+        <button type="button" pButton (click)="salvar()" label="Salvar" class="p-button-success p-mr-2 p-mb-2"></button>
     </div>
 
 </div>

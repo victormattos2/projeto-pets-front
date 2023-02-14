@@ -1,3 +1,10 @@
+import { LoginComponent } from './account/login/login.component';
+import { ConsultaAgendamentoComponent } from './components/consulta-agendamento/consulta-agendamento.component';
+import { ConsultaVendaComponent } from './components/consulta-venda/consulta-venda.component';
+import { ConsultaMovimentacaoComponent } from './components/consulta-movimentacao/consulta-movimentacao.component';
+import { EntradaMovimentacaoComponent } from './components/entrada-movimentacao/entrada-movimentacao.component';
+import { ConsultaUsuarioComponent } from './components/consulta-usuario/consulta-usuario.component';
+import { ConsultaPagamentoComponent } from './components/consulta-pagamento/consulta-pagamento.component';
 import { LancamentoVendaComponent } from './components/lancamento-venda/lancamento-venda.component';
 import { CadastroMarcaComponent } from './components/cadastro-marca/cadastro-marca.component';
 import { ConsultaMarcaComponent } from './components/consulta-marca/consulta-marca.component';
@@ -7,6 +14,7 @@ import { ConsultaPetsComponent } from './components/consulta-pets/consulta-pets.
 import { CadastroPetsComponent } from './components/cadastro-pets/cadastro-pets.component';
 import { ConsultaClienteComponent } from './components/consulta-cliente/consulta-cliente.component';
 import { CadastroClienteComponent } from './components/cadastro-cliente/cadastro-cliente.component';
+import { CadastroUsuarioComponent } from './components/cadastro-usuario/cadastro-usuario.component';
 import {RouterModule} from '@angular/router';
 import {NgModule} from '@angular/core';
 
@@ -43,10 +51,12 @@ import {AppMainComponent} from './app.main.component';
 import {AppNotfoundComponent} from './pages/app.notfound.component';
 import {AppErrorComponent} from './pages/app.error.component';
 import {AppAccessdeniedComponent} from './pages/app.accessdenied.component';
-import {AppLoginComponent} from './pages/app.login.component';
+
 import {AppCrudComponent} from './pages/app.crud.component';
 import {AppCalendarComponent} from './pages/app.calendar.component';
 import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
+import { CadastroPagamentoComponent } from './components/cadastro-pagamento/cadastro-pagamento.component';
+import { CadastroAgendamentoComponent } from './components/cadastro-agendamento/cadastro-agendamento.component';
 
 
 
@@ -54,17 +64,36 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
     imports: [
         RouterModule.forRoot([
             {
-                path: '', component: AppMainComponent,
+                path: '', 
+                component: AppMainComponent,
                 children: [
+                    {path: 'cosulta-agendamento', component: ConsultaAgendamentoComponent },
+                    {path: 'cadastro-agendamento', component: CadastroAgendamentoComponent },
+                    {path: 'cadastro-agendamento/:id', component: CadastroAgendamentoComponent},
+                    {path: 'consulta-movimentacao', component: ConsultaMovimentacaoComponent },
+                    {path: 'entrada-movimentacao', component: EntradaMovimentacaoComponent},
+                    {path: 'entrada-movimentacao/:id', component: EntradaMovimentacaoComponent},
+                    {path: 'consulta-usuario', component: ConsultaUsuarioComponent},
+                    {path: 'cadastro-usuario', component: CadastroUsuarioComponent },
+                    {path: 'cadastro-usuario/:id', component: CadastroUsuarioComponent},
+                    {path: 'consulta-pagamento', component: ConsultaPagamentoComponent},
+                    {path: 'cadastro-pagamento', component: CadastroPagamentoComponent},
+                    {path: 'cadastro-pagamento/:id', component: CadastroPagamentoComponent},
+                    {path: 'consulta-venda', component: ConsultaVendaComponent},
                     {path: 'lancamento-venda', component: LancamentoVendaComponent},
+                    {path: 'lancamento-venda/:id', component: LancamentoVendaComponent},
                     {path: 'cadastro-marca', component: CadastroMarcaComponent},
                     {path: 'consulta-marca', component: ConsultaMarcaComponent},
+                    {path: 'cadastro-marca/:id', component: CadastroMarcaComponent},
                     {path: 'cadastro-produtos', component: CadastroProdutosComponent},
                     {path: 'consulta-produtos', component: ConsultaProdutosComponent},
+                    {path: 'cadastro-produtos/:id', component: CadastroProdutosComponent},
                     {path: 'cadastro-cliente', component: CadastroClienteComponent},
                     {path: 'consulta-cliente', component: ConsultaClienteComponent},
+                    {path: 'cadastro-cliente/:id', component: CadastroClienteComponent},
                     {path: 'cadastro-pets', component: CadastroPetsComponent},
                     {path: 'consulta-pets', component: ConsultaPetsComponent},
+                    {path: 'cadastro-pets/:id', component: CadastroPetsComponent},
                     {path: '', component: DashboardDemoComponent},
                     {path: 'uikit/formlayout', component: FormLayoutDemoComponent},
                     {path: 'uikit/floatlabel', component: FloatLabelDemoComponent},
@@ -100,10 +129,11 @@ import {AppTimelineDemoComponent} from './pages/app.timelinedemo.component';
                     {path: 'documentation', component: DocumentationComponent}
                 ]
             },
+           
             {path: 'error', component: AppErrorComponent},
             {path: 'accessdenied', component: AppAccessdeniedComponent},
             {path: 'notfound', component: AppNotfoundComponent},
-            {path: 'login', component: AppLoginComponent},
+            {path: 'login', component: LoginComponent},
             {path: '**', redirectTo: '/notfound'},
         ], {scrollPositionRestoration: 'enabled'})
     ],

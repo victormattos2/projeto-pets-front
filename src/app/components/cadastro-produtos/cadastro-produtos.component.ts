@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { MarcaService } from './../../services/marca.service';
 import { Produto } from './../../models/model';
 import { ProdutoService } from './../../services/produto.service';
@@ -15,17 +16,29 @@ export class CadastroProdutosComponent implements OnInit {
   providers:[MessageService]
   results:any[]
 
-  constructor(private produtoService: ProdutoService,
+  constructor(
+    protected Router: ActivatedRoute,
+    private produtoService: ProdutoService,
     private MessageService:MessageService,
-    private marcaService:MarcaService) {
+    private marcaService:MarcaService,
+    private router: Router) {
 
      }
 
      ngOnInit(): void {
+      const id = this.Router.snapshot.params['id'];
+      if (id != undefined) {
+        this.produtoService.findById(id).subscribe((response) => {
+          console.log(response);
+          this.produto = response as Produto;
+        })
+      }
     }
+
     salvar(){
       this.produtoService.save(this.produto).subscribe((response)=>{
-        this.MessageService.add({key: 'tst',severity:'succes', summary: 'Sucesso', detail:'Produto Cadastrado'});
+        this.MessageService.add({key: 'tst',severity:'success', summary: 'Sucesso', detail:'Produto Cadastrado'});
+        this.produto=new Produto();
       })
     }
     search(event) {

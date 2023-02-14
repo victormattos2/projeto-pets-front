@@ -1,6 +1,7 @@
+<button type="button" pButton (click)="novo()" label="Novo" class="p-button-primary p-mr-2 p-mb-2"></button>
 <p-table [value]="pets" responsiveLayout="scroll">
     <ng-template pTemplate="header">
-        <!-- <tr>Codigo</tr> -->
+        <h5>Consulta de Pets</h5>
     <tr>
         <th>Nome</th>
         <th>Raça</th>
@@ -26,7 +27,10 @@
             <td>{{pets.peso}}</td>
             <td>{{pets.data_nascimento}}</td>
             <td>{{pets.data_cadastro}}</td>
-            <td><button (click)="deletar(pets.id_pets)" pButton><i class="pi pi-trash"></i></button></td>
+            <td>
+                <button (click)="editar(pets.id_pets)" pButton class="p-mr-1" icon="pi pi-pencil"></button>    
+                <button (click)="deletar(pets.id_pets)" pButton class="p-button-danger" icon="pi pi-trash"></button>
+            </td>
 
         </tr>
 

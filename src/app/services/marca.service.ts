@@ -14,6 +14,11 @@ export class MarcaService {
    return this.http.get(this.apiURL)
 
   }
+   
+  findById(id){
+    return this.http.get(this.apiURL + "/" + id);
+ 
+   }
   
   save(marca){
     return this.http.post(this.apiURL, marca)
@@ -22,4 +27,8 @@ export class MarcaService {
   filtrar(filtro){
     return this.http.post(`${this.apiURL}/filtrar`,filtro).toPromise().then(data => { return data; })
   }
+  
+  deletar(id: number){
+    return this.http.delete(this.apiURL+'/'+id)
+   }
 }

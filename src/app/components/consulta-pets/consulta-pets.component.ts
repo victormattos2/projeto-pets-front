@@ -1,3 +1,5 @@
+import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 import { Pets } from './../../models/model';
 import { PetsService } from './../../services/pets.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConsultaPetsComponent implements OnInit {
   
-  pets: Pets[] = [];
+  pets: any[] = [];
 
-  constructor( private PetsService: PetsService ) { 
+  providers: [MessageService]
+
+  constructor( private PetsService: PetsService,
+               private router: Router,
+               private messageService: MessageService) { 
   }
 
   ngOnInit(): void {
@@ -24,4 +30,19 @@ export class ConsultaPetsComponent implements OnInit {
       
     })
   }
+
+  novo(){
+    this.router.navigate(['cadastro-pets'])
+  }
+
+  editar(id){
+    this.router.navigate([`cadastro-pets/${id}`]);
+  }
+ 
+  deletar(id){
+    this.PetsService.deletar(id).subscribe(()=>{
+      this.findall();
+    })
+  }
+ 
 }

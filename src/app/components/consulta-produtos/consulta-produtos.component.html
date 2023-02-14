@@ -1,4 +1,5 @@
-<p-table [value]="produtos" responsiveLayout="scroll">
+<button type="button" pButton (click)="novo()" label="Novo" class="p-button-primary p-mr-2 p-mb-2"></button>
+<p-table [value]="produto" responsiveLayout="scroll">
     <ng-template pTemplate="header">
         <tr>
             <!-- <th>Codigo</th> -->
@@ -6,6 +7,7 @@
             <th>UN</th>
             <th>Marca</th>
             <th>Grupo</th>
+            <th>Ações</th>
            <!--  <th>situação</th> -->
         
 
@@ -18,6 +20,10 @@
             <td>{{produtos.unidade}}</td>
             <td>{{produtos.marca?.nome}}</td>
             <td>{{produtos.grupo}}</td>
+            <td>
+                <button (click)="editar(produtos.id_produto)" pButton class="p-mr-1" icon="pi pi-pencil"></button>    
+                <button (click)="deletar(produtos.id_produto)" pButton class="p-button-danger" icon="pi pi-trash"></button>
+            </td>
          <!--    <td>{{cliente.situacao}}</td> -->
     
             

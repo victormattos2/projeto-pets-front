@@ -1,4 +1,5 @@
-import {Component} from '@angular/core';
+import { Usuario } from './models/model';
+import {Component, OnInit} from '@angular/core';
 import {AppMainComponent} from './app.main.component';
 
 @Component({
@@ -9,7 +10,7 @@ import {AppMainComponent} from './app.main.component';
                 <div class="layout-topbar-left">
 					<div class="layout-topbar-logo-wrapper">
 						<a href="#" class="layout-topbar-logo">
-							<img src="assets/layout/images/logo-mirage@2x.png" alt="mirage-layout" />
+							<!-- <img src="assets/layout/images/logo-mirage@2x.png" alt="mirage-layout" /> -->
 							<span class="app-name">Space Pets</span>
 						</a>
 					</div>
@@ -103,7 +104,7 @@ import {AppMainComponent} from './app.main.component';
                 </div>
                 <div class="layout-topbar-right fadeInDown">
 					<ul class="layout-topbar-actions">
-						<li #search class="search-item topbar-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === search}">
+						<!-- <li #search class="search-item topbar-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === search}">
 							<a href="#" class="topbar-search-mobile-button" (click)="appMain.onTopbarItemClick($event,search)">
 								<i class="topbar-icon pi pi-search"></i>
 							</a>
@@ -115,7 +116,7 @@ import {AppMainComponent} from './app.main.component';
                                     </span>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
 						<li #calendar class="topbar-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === calendar}">
 							<a href="#" (click)="appMain.onTopbarItemClick($event,calendar)">
 								<i class="topbar-icon pi pi-calendar"></i>
@@ -130,58 +131,11 @@ import {AppMainComponent} from './app.main.component';
 							</ul>
 						</li>
 
-						<li #message class="topbar-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === message}">
-							<a href="#" (click)="appMain.onTopbarItemClick($event,message)">
-							<!-- 	<i class="topbar-icon pi pi-inbox"></i> -->
-							</a>
-							<ul class="fadeInDown">
-								<li class="layout-submenu-header">
-									<h1>Messages</h1>
-									<span>Today, you have new 4 messages</span>
-								</li>
-								<li class="layout-submenu-item">
-									<img src="assets/layout/images/topbar/avatar-cayla.png" alt="mirage-layout" width="35" />
-									<div class="menu-text">
-										<p>Override the digital divide</p>
-										<span>Cayla Brister</span>
-									</div>
-								<!-- 	<i class="pi pi-angle-right"></i> -->
-								</li>
-								<li class="layout-submenu-item">
-									<img src="assets/layout/images/topbar/avatar-gabie.png" alt="mirage-layout" width="35" />
-									<div class="menu-text">
-										<p>Nanotechnology immersion</p>
-										<span>Gabie Sheber</span>
-									</div>
-									<i class="pi pi-angle-right"></i>
-								</li>
-								<li class="layout-submenu-item">
-									<img src="assets/layout/images/topbar/avatar-gaspar.png" alt="mirage-layout" width="35" />
-									<div class="menu-text">
-										<p>User generated content</p>
-										<span>Gaspar Antunes</span>
-									</div>
-									<i class="pi pi-angle-right"></i>
-								</li>
-								<li class="layout-submenu-item">
-									<img src="assets/layout/images/topbar/avatar-tatiana.png" alt="mirage-layout" width="35" />
-									<div class="menu-text">
-										<p>The holistic world view</p>
-										<span>Tatiana Gagelman</span>
-									</div>
-									<i class="pi pi-angle-right"></i>
-								</li>
-							</ul>
-						</li>
-
 						<li #gift class="topbar-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === gift}">
-							<a href="#" (click)="appMain.onTopbarItemClick($event,gift)">
-								<!-- <i class="topbar-icon pi pi-envelope"></i> -->
-							</a>
+							<!-- <a href="#" (click)="appMain.onTopbarItemClick($event,gift)">
+								<i class="topbar-icon pi pi-envelope"></i>
+							</a> -->
 							<ul class="fadeInDown">
-								<li class="layout-submenu-header">
-									<h1>Deals</h1>
-								</li>
 
 								<li class="deals">
 									<ul>
@@ -246,8 +200,8 @@ import {AppMainComponent} from './app.main.component';
                                 <img src="assets/fotos/logo_dog.jpg" alt="mirage-layout" />
                             </span>
 								<span class="profile-info-wrapper">
-                                <h3>Victor Mattos</h3>
-                                <span>Design</span>
+                                <h3>   {{usuario.login}} </h3>
+                                <span>{{usuario.tipo}}</span>
                             </span>
 							</a>
 							<ul class="profile-item-submenu fadeInDown">
@@ -259,8 +213,8 @@ import {AppMainComponent} from './app.main.component';
 									<div class="profile">
 										<img src="assets/fotos/usuario.jpg" alt="mirage-layout"
 														width="40" />
-										<h1>Victor Mattos</h1>
-										<span>Dev</span>
+										<h1>{{usuario.login}} </h1>
+										<span> {{usuario.login}}</span>
 									</div>
 								</li>
 								<li class="layout-submenu-item">
@@ -293,22 +247,22 @@ import {AppMainComponent} from './app.main.component';
 								</li>
 							</ul>
 						</li>
-						<li>
+						<!-- <li>
 							<a href="#" class="layout-rightpanel-button" (click)="appMain.onRightPanelButtonClick($event)">
 								<i class="pi pi-arrow-left"></i>
 							</a>
-						</li>
+						</li> -->
                     </ul>
 
 					<ul class="profile-mobile-wrapper">
 						<li #mobileProfile class="topbar-item profile-item" [ngClass]="{'active-topmenuitem': appMain.activeTopbarItem === mobileProfile}">
 							<a href="#" (click)="appMain.onTopbarItemClick($event,mobileProfile)">
                             <span class="profile-image-wrapper">
-                                <img src="assets/layout/images/topbar/avatar-eklund.png" alt="mirage-layout" />
+                              <!--   <img src="assets/layout/images/topbar/avatar-eklund.png" alt="mirage-layout" /> -->
                             </span>
 								<span class="profile-info-wrapper">
-                                <h3>Olivia Eklund</h3>
-                                <span>Design</span>
+                                <!-- <h3>Olivia Eklund</h3>
+                                <span>Design</span> -->
                             </span>
 							</a>
 							<ul class="fadeInDown">
@@ -318,9 +272,9 @@ import {AppMainComponent} from './app.main.component';
 										<img src="assets/layout/images/topbar/asset-bars.svg" alt="mirage-layout" />
 									</div>
 									<div class="profile">
-										<img src="assets/layout/images/topbar/avatar-eklund.png" alt="mirage-layout" width="45" />
-										<h1>Olivia Eklund</h1>
-										<span>Design</span>
+										<!-- <img src="assets/layout/images/topbar/avatar-eklund.png" alt="mirage-layout" width="45" /> -->
+										<!-- <h1>Olivia Eklund</h1>
+										<span>Design</span> -->
 									</div>
 								</li>
 								<li>
@@ -359,15 +313,22 @@ import {AppMainComponent} from './app.main.component';
         </div>
     `
 })
-export class AppTopBarComponent {
+export class AppTopBarComponent implements OnInit{
 
     activeItem: number;
 
+	usuario:  Usuario = new Usuario; 
+
     constructor(public appMain: AppMainComponent) {}
+	ngOnInit(): void {
+		this.usuario = JSON.parse(localStorage.getItem('usuario'));
+	}
 
     mobileMegaMenuItemClick(index) {
         this.appMain.megaMenuMobileClick = true;
         this.activeItem = this.activeItem === index ? null : index;
     }
+
+	
 
 }
